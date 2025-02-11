@@ -18,7 +18,7 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-  late bool _loggedIn;
+  bool _loggedIn = false;
 
   @override
   void initState() {
@@ -27,13 +27,13 @@ class _MainAppState extends State<MainApp> {
   }
 
   void initialization() async {
-    print("Pausing Progress");
+    print("Checking Authentication");
     bool loggedIn = await fetchUserData();
     setState(() {
       _loggedIn = loggedIn;
     });
     FlutterNativeSplash.remove();
-    print("Unpausing Progress");
+    print("Removing Splash Screen");
   }
 
   @override
