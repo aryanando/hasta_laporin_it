@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:hasta_laporin_it/pages/home/home.dart';
+import 'package:hasta_laporin_it/pages/login/login.dart';
+import 'package:hasta_laporin_it/pages/login/token_check.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +18,8 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
+  late bool _loggedIn;
+
   @override
   void initState() {
     super.initState();
@@ -23,23 +28,20 @@ class _MainAppState extends State<MainApp> {
 
   void initialization() async {
     print("Pausing Progress");
-    await Future.delayed(const Duration(seconds: 3));
-    print("Unpausing Progress");
+    bool loggedIn = await fetchUserData();
+    setState(() {
+      _loggedIn = loggedIn;
+    });
     FlutterNativeSplash.remove();
+    print("Unpausing Progress");
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Latihan"),
-          backgroundColor: Colors.lightBlue,
-        ),
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
+    if (!_loggedIn) {
+      return MaterialApp(home: LoginPage());
+    } else {
+      return MaterialApp(home: HomePage());
+    }
   }
 }
