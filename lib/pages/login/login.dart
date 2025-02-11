@@ -85,7 +85,11 @@ class _LoginPageState extends State<LoginPage>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: ResizeImage(AssetImage('assets/branding.png'), width: 135),
+            alignment: Alignment.bottomCenter,
+          ),
           gradient: LinearGradient(
             colors: [
               Color.fromARGB(255, 255, 255, 255),
