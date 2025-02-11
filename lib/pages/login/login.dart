@@ -37,6 +37,7 @@ class _LoginPageState extends State<LoginPage>
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late AnimationController _animationController;
   late Animation<double> _opacityAnimation;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -62,7 +63,9 @@ class _LoginPageState extends State<LoginPage>
     if (_formKey.currentState!.validate()) {
       String email = _emailController.text;
       String password = _passwordController.text;
-
+      setState(() {
+        isLoading = true;
+      });
       loginUser(email, password, context);
     }
   }
@@ -142,20 +145,29 @@ class _LoginPageState extends State<LoginPage>
                               value!.isEmpty ? 'Enter password' : null,
                         ),
                         const SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: _login,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.indigo,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 40, vertical: 15),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          child: const Text('Login',
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.white)),
-                        ),
+                        !isLoading
+                            ? ElevatedButton(
+                                onPressed: _login,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.indigo,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 40, vertical: 15),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: const Text('Login',
+                                    style: TextStyle(
+                                        fontSize: 18, color: Colors.white)),
+                              )
+                            : SizedBox(
+                                width: 24,
+                                height: 24,
+                                child: CircularProgressIndicator(
+                                  color: Colors.indigo,
+                                  strokeWidth: 2,
+                                ),
+                              )
                       ],
                     ),
                   ),
