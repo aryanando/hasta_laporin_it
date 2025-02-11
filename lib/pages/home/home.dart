@@ -8,11 +8,47 @@ import 'package:hasta_laporin_it/pages/login/logout_handle.dart';
 // }
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  void _showConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Konfirmasi"),
+          content: Text("Anda yakin untuk keluar?"),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text("Batal"),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: Text("Ya"),
+            ),
+          ],
+        );
+      },
+    ).then((confirmed) {
+      if (confirmed == true) {
+        logoutUser((status) => {
+              if (status)
+                {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                  )
+                }
+            });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +57,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             _buildHeader(),
-            _buildTransactionSection(),
+            _buildHistorySection(),
           ],
         ),
       ),
@@ -65,18 +101,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white),
                 child: IconButton(
-                  onPressed: () => {
-                    logoutUser((status) => {
-                          if (status)
-                            {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const LoginPage()),
-                              )
-                            }
-                        })
-                  },
+                  onPressed: () => {_showConfirmationDialog(context)},
                   icon: Icon(
                     Icons.logout_rounded,
                     size: 30,
@@ -89,7 +114,7 @@ class _HomePageState extends State<HomePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildBalanceCard(),
+              _buildCurrentReportCard(),
             ],
           ),
           SizedBox(height: 20),
@@ -117,13 +142,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildBalanceCard() {
+  Widget _buildCurrentReportCard() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text("Status Laporan Anda", style: TextStyle(color: Colors.white)),
         Text(
-          "Printer Error",
+          "Absen Error",
           style: GoogleFonts.poppins(
             fontSize: 22,
             fontWeight: FontWeight.bold,
@@ -188,7 +213,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildTransactionSection() {
+  Widget _buildHistorySection() {
     return Padding(
       padding: EdgeInsets.all(16),
       child: Column(
@@ -197,20 +222,17 @@ class _HomePageState extends State<HomePage> {
           Text("Histori Laporan",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           SizedBox(height: 10),
-          _transactionItem("Printer Error", "antrian", Colors.red, Icons.print),
-          _transactionItem(
-              "Absen error", "proses", Colors.orange, Icons.camera),
-          _transactionItem(
+          dHistoryItem("Printer Error", "antrian", Colors.red, Icons.print),
+          dHistoryItem("Absen error", "proses", Colors.orange, Icons.camera),
+          dHistoryItem(
               "Internet Putus", "selesai", Colors.green, Icons.network_cell),
-          _transactionItem(
-              "Printer Error", "selesai", Colors.green, Icons.print),
+          dHistoryItem("Printer Error", "selesai", Colors.green, Icons.print),
         ],
       ),
     );
   }
 
-  Widget _transactionItem(
-      String title, String amount, Color color, IconData icon) {
+  Widget dHistoryItem(String title, String amount, Color color, IconData icon) {
     return Card(
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -232,10 +254,15 @@ class _HomePageState extends State<HomePage> {
       unselectedItemColor: Colors.grey,
       currentIndex: 2,
       items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.home, color: Colors.blue), label: ""),
         BottomNavigationBarItem(icon: Icon(Icons.pie_chart), label: ""),
         BottomNavigationBarItem(
-            icon: Icon(Icons.qr_code_scanner, color: Colors.blue), label: ""),
+            icon: Icon(
+              Icons.qr_code_scanner,
+              color: Colors.grey,
+            ),
+            label: ""),
         BottomNavigationBarItem(
             icon: Icon(Icons.chat_bubble_outline), label: ""),
         BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
