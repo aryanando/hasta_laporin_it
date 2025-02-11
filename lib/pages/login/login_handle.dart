@@ -4,8 +4,8 @@ import 'package:hasta_laporin_it/pages/home/home.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<void> loginUser(
-    String email, String password, BuildContext context) async {
+Future<void> loginUser(String email, String password, BuildContext context,
+    Function callback) async {
   final String apiUrl =
       'https://api.batubhayangkara.com/api/v1/login'; // Replace with your API URL
 
@@ -31,6 +31,7 @@ Future<void> loginUser(
       print('Login successful: Token stored.'); // Handle token storage here
     } else {
       print('Login failed: ${response.body}');
+      callback(true);
     }
   } catch (e) {
     print('Error during login: $e');

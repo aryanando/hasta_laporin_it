@@ -38,6 +38,8 @@ class _LoginPageState extends State<LoginPage>
   late AnimationController _animationController;
   late Animation<double> _opacityAnimation;
   bool isLoading = false;
+  bool showLoginMessage = false;
+  bool isObscured = true;
 
   @override
   void initState() {
@@ -66,7 +68,16 @@ class _LoginPageState extends State<LoginPage>
       setState(() {
         isLoading = true;
       });
-      loginUser(email, password, context);
+      loginUser(
+          email,
+          password,
+          context,
+          (status) => {
+                setState(() {
+                  showLoginMessage = status;
+                  isLoading = false;
+                })
+              });
     }
   }
 
@@ -132,18 +143,35 @@ class _LoginPageState extends State<LoginPage>
                         const SizedBox(height: 10),
                         TextFormField(
                           controller: _passwordController,
-                          obscureText: true,
+                          obscureText: isObscured,
                           decoration: InputDecoration(
-                            labelText: 'Password',
-                            prefixIcon:
-                                const Icon(Icons.lock, color: Colors.indigo),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
+                              labelText: 'Password',
+                              prefixIcon:
+                                  const Icon(Icons.lock, color: Colors.indigo),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              suffixIcon: IconButton(
+                                  onPressed: () => {
+                                        setState(() {
+                                          isObscured = !isObscured;
+                                        })
+                                      },
+                                  icon: Icon(
+                                    isObscured
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: Colors.indigo,
+                                  ))),
                           validator: (value) =>
                               value!.isEmpty ? 'Enter password' : null,
                         ),
+                        showLoginMessage
+                            ? Text(
+                                'Login Failed !!!',
+                                style: TextStyle(color: Colors.red),
+                              )
+                            : Text(''),
                         const SizedBox(height: 20),
                         !isLoading
                             ? ElevatedButton(
