@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hasta_laporin_it/pages/login/login.dart';
 import 'package:hasta_laporin_it/pages/login/logout_handle.dart';
 
 // void main() {
@@ -64,7 +65,18 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white),
                 child: IconButton(
-                  onPressed: () => {logoutUser()},
+                  onPressed: () => {
+                    logoutUser((status) => {
+                          if (status)
+                            {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginPage()),
+                              )
+                            }
+                        })
+                  },
                   icon: Icon(
                     Icons.logout_rounded,
                     size: 30,
