@@ -1,7 +1,7 @@
-# IT Trouble Report App
+# Laporin IT App
 
 ## 📌 Overview
-IT Trouble Report App is a Flutter-based mobile application that allows users to report information technology issues. The app provides an intuitive UI, authentication, and issue tracking features to streamline IT support requests.
+Laporin IT App is a Flutter-based mobile application that allows users to report information technology issues. The app provides an intuitive UI, authentication, and issue tracking features to streamline IT support requests.
 
 ## 🚀 Features
 - 📲 **User Authentication** (Sign up, Login, Logout)
@@ -25,7 +25,7 @@ IT Trouble Report App is a Flutter-based mobile application that allows users to
 
 ## 📂 Project Structure
 ```
-📦 it_trouble_report_app
+📦 hasta_laporin_it
  ┣ 📂 assets
  ┣ 📂 lib
  ┃ ┣ 📂 components
@@ -47,7 +47,7 @@ IT Trouble Report App is a Flutter-based mobile application that allows users to
 - **Username:** user1@demo.com
 - **Password:** 123456
 
-1. **Clone the repository**
+1. **Clone the reposory**
    ```sh
    git@github.com:aryanando/hasta_laporin_it.git
    cd hasta_laporin_it
