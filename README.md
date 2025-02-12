@@ -53,6 +53,11 @@ IT Trouble Report App is a Flutter-based mobile application that allows users to
 ```
 
 ## 🏗️ Installation
+
+## 🔑 Demo Credentials
+- **Username:** user1@demo.com
+- **Password:** 123456
+
 1. **Clone the repository**
    ```sh
    git@github.com:aryanando/hasta_laporin_it.git
