@@ -12,21 +12,21 @@ IT Trouble Report App is a Flutter-based mobile application that allows users to
 - 🌐 **Multi-language Support**
 - 🎨 **Modern UI with Animations**
 
+## 🖼️ Screenshots
+![Screenshot 1](screenshot/screenshot1.png)
+![Screenshot 2](screenshot/screenshot2.png)
+
 ## 🛠️ Tech Stack
 - **Flutter** (Dart)
-- **Firebase / Supabase** (Authentication & Database)
-- **Provider / Riverpod / Bloc** (State Management)
-- **REST API / GraphQL** (Backend Communication)
-- **Hive / Shared Preferences** (Local Storage)
-- **Fastlane / Codemagic** (CI/CD for Deployment)
+- **JWT / Mysql** (Authentication & Database)
+- **Provider** (State Management)
+- **REST API** (Backend Communication)
+- **Shared Preferences** (Local Storage)
 
 ## 📂 Project Structure
 ```
 📦 it_trouble_report_app
- ┣ 📂 android
  ┣ 📂 assets
- ┣ 📂 build
- ┣ 📂 ios
  ┣ 📂 lib
  ┃ ┣ 📂 components
  ┃ ┃ ┗ 📜 logout_confirmation_dialog.dart
@@ -39,17 +39,6 @@ IT Trouble Report App is a Flutter-based mobile application that allows users to
  ┃ ┃ ┃ ┣ 📜 logout_handle.dart
  ┃ ┃ ┃ ┗ 📜 token_check.dart
  ┃ ┗ 📜 main.dart
- ┣ 📂 linux
- ┣ 📂 macos
- ┣ 📂 web
- ┣ 📂 windows
- ┣ 📜 .gitignore
- ┣ 📜 .metadata
- ┣ 📜 analysis_options.yaml
- ┣ 📜 native_splash.yaml
- ┣ 📜 pubspec.lock
- ┣ 📜 pubspec.yaml
- ┣ 📜 README.md
 ```
 
 ## 🏗️ Installation
@@ -71,10 +60,6 @@ IT Trouble Report App is a Flutter-based mobile application that allows users to
    ```sh
    flutter run
    ```
-
-## 🖼️ Screenshots
-![Screenshot 1](screenshot/screenshot1.png)
-![Screenshot 2](screenshot/screenshot2.png)
 
 ## 🎯 Contribution
 Contributions are welcome! Feel free to open issues or submit pull requests.
