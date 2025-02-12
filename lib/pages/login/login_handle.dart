@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<void> loginUser(String email, String password, BuildContext context,
     Function callback) async {
   final String apiUrl =
-      'https://api.batubhayangkara.com/api/v1/login'; // Replace with your API URL
+      'https://api2.batubhayangkara.com/auth/login'; // Replace with your API URL
 
   try {
     final response = await http.post(
@@ -16,9 +16,9 @@ Future<void> loginUser(String email, String password, BuildContext context,
       body: jsonEncode({"email": email, "password": password}),
     );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       final data = jsonDecode(response.body);
-      String token = data['token']['token']; // Extract token from response
+      String token = data['access_token']; // Extract token from response
 
       // Save token in SharedPreferences
       SharedPreferences prefs = await SharedPreferences.getInstance();

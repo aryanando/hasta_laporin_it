@@ -7,7 +7,7 @@ Future<String?> getToken() async {
 }
 
 Future<bool> fetchUserData() async {
-  final String apiUrl = 'https://api.batubhayangkara.com/api/v1/me';
+  final String apiUrl = 'https://api2.batubhayangkara.com/users/profile';
   String? token = await getToken();
 
   if (token == null) {
