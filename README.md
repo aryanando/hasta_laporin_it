@@ -49,7 +49,7 @@ Laporin IT App is a Flutter-based mobile application that allows users to report
 
 1. **Clone the reposory**
    ```sh
-   git@github.com:aryanando/hasta_laporin_it.git
+   git clone https://github.com/aryanando/hasta_laporin_it.git
    cd hasta_laporin_it
    ```
 2. **Install dependencies**
