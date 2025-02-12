@@ -78,5 +78,5 @@ Contributions are welcome! Feel free to open issues or submit pull requests.
 This project is licensed under the MIT License.
 
 ## 📞 Contact
-For any inquiries, please contact [your email] or open an issue in the repository.
+For any inquiries, please contact aryanando232@gmail.com or open an issue in the repository.
 
