@@ -15,25 +15,40 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  void _showConfirmationDialog(BuildContext context) {
-    showDialog(
+  void showAnimatedDialog(BuildContext context) {
+    showGeneralDialog(
       context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Konfirmasi"),
-          content: Text("Anda yakin untuk keluar?"),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: Text("Batal"),
+      barrierDismissible: true,
+      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+      pageBuilder: (context, anim1, anim2) {
+        return const SizedBox.shrink(); // Placeholder
+      },
+      transitionBuilder: (context, anim1, anim2, child) {
+        return Transform.scale(
+          scale: anim1.value,
+          child: Opacity(
+            opacity: anim1.value,
+            child: AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              title: Text("Konfirmasi"),
+              content: Text("Anda yakin untuk keluar?"),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: Text("Batal"),
+                ),
+                ElevatedButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  child: Text("Ya"),
+                ),
+              ],
             ),
-            ElevatedButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: Text("Ya"),
-            ),
-          ],
+          ),
         );
       },
+      transitionDuration: const Duration(milliseconds: 300),
     ).then((confirmed) {
       if (confirmed == true) {
         logoutUser((status) => {
@@ -101,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white),
                 child: IconButton(
-                  onPressed: () => {_showConfirmationDialog(context)},
+                  onPressed: () => {showAnimatedDialog(context)},
                   icon: Icon(
                     Icons.logout_rounded,
                     size: 30,
