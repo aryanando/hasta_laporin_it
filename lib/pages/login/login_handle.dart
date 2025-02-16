@@ -23,10 +23,12 @@ Future<void> loginUser(String email, String password, BuildContext context,
       // Save token in SharedPreferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('auth_token', token);
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage()),
-      );
+      if (context.mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
+      }
 
       print('Login successful: Token stored.'); // Handle token storage here
     } else {
